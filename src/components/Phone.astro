@@ -1,0 +1,48 @@
+---
+const chips = ['20 KB', '50 KB', '100 KB', '200 KB', '500 KB'];
+---
+<div class="phone" role="img" aria-label="TrueSize app showing a 3.0 MB photo compressed to 98 KB with a 100 KB ceiling">
+  <div class="notch"></div>
+  <div class="screen">
+    <div class="status"><span>9:41</span><span>● ● ▮</span></div>
+    <div class="top"><strong>Compress</strong><span class="step">STEP 3 OF 4</span></div>
+    <div class="photo"><div class="sun"></div><div class="hill h1"></div><div class="hill h2"></div><span class="tag">photo.heic</span></div>
+    <div class="label">Maximum file size</div>
+    <div class="chips">{chips.map((c) => <span class={c === '100 KB' ? 'chip on' : 'chip'}>{c}</span>)}<span class="chip">Custom</span></div>
+    <div class="result">
+      <div><small>Original</small><b>3.0 MB</b></div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <div><small>Compressed</small><b class="g">98 KB</b></div>
+    </div>
+    <div class="bar"><i></i></div>
+    <div class="note">✓ Verified under your 100 KB ceiling</div>
+    <div class="cta">Save copy</div>
+  </div>
+</div>
+<style>
+  .phone { width: min(300px, 78vw); aspect-ratio: 9 / 18.6; background: #0d1312; border-radius: 44px; padding: 10px; box-shadow: var(--shadow-lg); position: relative; margin-inline: auto; }
+  .notch { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 76px; height: 20px; background: #0d1312; border-radius: 20px; z-index: 2; }
+  .screen { background: #f8f9fc; color: #14162b; height: 100%; border-radius: 34px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; font-size: 12px; }
+  .status { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; padding: 0 6px; }
+  .top { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; }
+  .top strong { font-size: 18px; letter-spacing: -.02em; }
+  .step { font-size: 9px; color: #5f6580; font-weight: 600; letter-spacing: .06em; }
+  .photo { position: relative; height: 34%; border-radius: 16px; overflow: hidden; background: linear-gradient(#dbe4ff, #f3f5ff 70%); flex-shrink: 0; }
+  .sun { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #fff6d6; right: 22px; top: 18px; }
+  .hill { position: absolute; border-radius: 50%; }
+  .h1 { width: 170px; height: 120px; background: #4f46e5; left: -30px; bottom: -60px; }
+  .h2 { width: 190px; height: 110px; background: #3730a3; right: -50px; bottom: -64px; }
+  .tag { position: absolute; left: 10px; top: 10px; background: rgb(255 255 255 / .85); padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; }
+  .label { font-weight: 600; font-size: 12px; margin-top: 2px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { padding: 5px 10px; border-radius: 999px; background: #fff; border: 1px solid #e3e6ef; font-size: 11px; font-weight: 500; }
+  .chip.on { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+  .result { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #e3e6ef; border-radius: 14px; padding: 10px 14px; color: #4f46e5; }
+  .result small { display: block; color: #5f6580; font-size: 10px; }
+  .result b { font-size: 17px; color: #14162b; letter-spacing: -.02em; }
+  .result b.g { color: #4f46e5; }
+  .bar { height: 6px; background: #e3e6ef; border-radius: 6px; overflow: hidden; }
+  .bar i { display: block; width: 33%; height: 100%; background: #4f46e5; border-radius: 6px; }
+  .note { color: #3730a3; font-weight: 600; font-size: 11px; }
+  .cta { margin-top: auto; background: #4f46e5; color: #fff; text-align: center; padding: 11px; border-radius: 12px; font-weight: 600; font-size: 13px; }
+</style>

@@ -1,0 +1,56 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+const getApp = SITE.storeUrl || '/#download';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/#features', label: 'Features' },
+  { href: '/#how', label: 'How it works' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/support', label: 'Support' },
+  { href: '/privacy', label: 'Privacy' },
+];
+---
+<header class="hdr">
+  <div class="container bar">
+    <Logo />
+    <nav aria-label="Primary" class="nav">
+      {links.map((l) => <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <a class="btn btn-primary cta" href={getApp}>Get the app</a>
+    <button class="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav id="drawer" class="drawer" aria-label="Mobile" hidden>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a class="btn btn-primary" href={getApp}>Get the app</a>
+  </nav>
+</header>
+<style>
+  .hdr { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+  .bar { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .nav { margin-inline: auto; display: flex; gap: 4px; }
+  .nav a { padding: 8px 14px; border-radius: 8px; color: var(--muted); font-size: 15px; font-weight: 500; text-decoration: none; transition: color .15s, background .15s; }
+  .nav a:hover, .nav a[aria-current='page'] { color: var(--text); background: var(--surface-2); }
+  .cta { min-height: 40px; padding: 0 16px; }
+  .burger { display: none; width: 44px; height: 44px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 4px; margin-left: auto; }
+  .burger span { width: 18px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .drawer { display: flex; flex-direction: column; gap: 4px; padding: 12px 20px 20px; border-top: 1px solid var(--line); background: var(--bg); }
+  .drawer[hidden] { display: none; }
+  .drawer a:not(.btn) { padding: 14px 8px; color: var(--text); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--line); min-height: 48px; }
+  .drawer .btn { margin-top: 12px; }
+  @media (max-width: 820px) { .nav, .cta { display: none; } .burger { display: flex; } }
+  @media (min-width: 821px) { .drawer { display: none !important; } }
+</style>
+<script>
+  const b = document.querySelector<HTMLButtonElement>('.burger')!;
+  const d = document.getElementById('drawer')!;
+  const set = (open: boolean) => { b.setAttribute('aria-expanded', String(open)); b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); d.hidden = !open; };
+  b.addEventListener('click', () => set(b.getAttribute('aria-expanded') !== 'true'));
+  d.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) set(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

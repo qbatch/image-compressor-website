@@ -1,0 +1,28 @@
+---
+import Base from './Base.astro';
+const { title, description, updated, eyebrow } = Astro.props;
+---
+<Base title={title} description={description}>
+  <section class="doc-hero"><div class="container narrow">
+    <span class="eyebrow">{eyebrow}</span><h1>{title}</h1>
+    {updated && <p class="upd">Last updated {updated}</p>}
+  </div></section>
+  <div class="container narrow doc"><slot /></div>
+</Base>
+<style is:global>
+  .narrow { max-width: 820px; }
+  .doc-hero { padding-block: clamp(40px, 7vw, 72px) 24px; background: radial-gradient(60% 100% at 20% 0, rgb(199 210 254 / .3), transparent 70%); }
+  .doc-hero h1 { font-size: clamp(34px, 5vw, 52px); margin: 16px 0 10px; letter-spacing: -0.03em; }
+  .upd { color: var(--muted); }
+  .doc { padding-block: 24px 80px; }
+  .prose section { padding-block: 28px; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
+  .prose section:last-child { border: 0; }
+  .prose h2 { font-size: 24px; margin-bottom: 12px; }
+  .prose p, .prose li { color: var(--muted); font-size: 16.5px; }
+  .prose p + p { margin-top: 12px; }
+  .prose ul { padding-left: 20px; margin: 12px 0 0; display: grid; gap: 8px; }
+  .prose strong { color: var(--text); }
+  .callout { background: var(--primary-tint); border: 1px solid var(--primary-soft); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 8px; }
+  .callout h2 { font-size: 18px; margin-bottom: 6px; color: var(--primary-dark); }
+  .callout p { color: var(--text); }
+</style>

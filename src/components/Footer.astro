@@ -1,0 +1,26 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+---
+<footer class="ftr">
+  <div class="container grid">
+    <div class="brand">
+      <Logo />
+      <p>Compress photos to an exact size ceiling — privately, on your device.</p>
+    </div>
+    <nav aria-label="Product"><h2>Product</h2><a href="/#features">Features</a><a href="/#how">How it works</a><a href="/#faq">FAQ</a></nav>
+    <nav aria-label="Legal and help"><h2>Help &amp; legal</h2><a href="/support">Support</a><a href="/privacy">Privacy Policy</a></nav>
+  </div>
+  <div class="container legal"><span>© {new Date().getFullYear()} {SITE.company}. All rights reserved.</span><span>Private by design</span></div>
+</footer>
+<style>
+  .ftr { border-top: 1px solid var(--line); background: var(--surface); padding-top: 56px; margin-top: 24px; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+  .brand p { color: var(--muted); max-width: 320px; margin-top: 8px; font-size: 15px; }
+  nav { display: flex; flex-direction: column; gap: 2px; }
+  nav h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+  nav a { color: var(--text); text-decoration: none; font-size: 15px; padding: 6px 0; min-height: 36px; }
+  nav a:hover { color: var(--primary); }
+  .legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-block: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } .brand { grid-column: 1 / -1; } }
+</style>

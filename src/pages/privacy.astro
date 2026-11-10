@@ -1,0 +1,30 @@
+---
+import Doc from '../layouts/Doc.astro';
+import { SITE } from '../config';
+---
+<Doc title="Privacy Policy" eyebrow="Legal" description="TrueSize processes images entirely on your device and collects no personal data. Read our full privacy policy." updated={SITE.updated}>
+  <div class="callout"><h2>The short version</h2><p>TrueSize works entirely on your device. We don’t collect, upload, store or sell your photos or any personal data, and the app has no accounts, ads or analytics.</p></div>
+  <div class="prose">
+    <section id="collect"><h2>1. Information we collect</h2>
+      <p>None. TrueSize does not collect personal information, device identifiers, usage analytics or crash reports, and it does not create user profiles.</p></section>
+    <section id="images"><h2>2. How your images are handled</h2>
+      <ul>
+        <li>You choose each image through your device’s system photo or file picker. TrueSize only receives the files you select.</li>
+        <li>Compression, resizing and format conversion run locally on your device. Images are <strong>never uploaded</strong> to any server.</li>
+        <li>Your original file is never modified or overwritten. Saving creates a new copy in a location you choose.</li>
+        <li>Temporary working files exist only while you use the app.</li>
+      </ul></section>
+    <section id="permissions"><h2>3. Permissions</h2>
+      <p>TrueSize relies on system pickers rather than broad storage access, so you grant access one selection at a time. If you choose to save results directly to your photo library, the system may ask for permission to write photos; this is used solely for that purpose. You can review or revoke permissions at any time in your device settings.</p></section>
+    <section id="sharing"><h2>4. Sharing</h2>
+      <p>When you tap Share, the system share sheet opens and you decide which app receives the compressed file. TrueSize does not share data with third parties on its own.</p></section>
+    <section id="third"><h2>5. Third-party services</h2>
+      <p>TrueSize does not integrate advertising, analytics or tracking SDKs. This website does not use cookies or tracking scripts.</p></section>
+    <section id="children"><h2>6. Children’s privacy</h2>
+      <p>Because we collect no personal data from anyone, we collect none from children under 13 (or the applicable age in your region).</p></section>
+    <section id="changes"><h2>7. Changes to this policy</h2>
+      <p>If the app’s data practices change, we will update this page and the “last updated” date above before the change takes effect.</p></section>
+    <section id="contact"><h2>8. Questions</h2>
+      <p>Questions about this policy? Visit our <a href="/support">support page</a>.</p></section>
+  </div>
+</Doc>

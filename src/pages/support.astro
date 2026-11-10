@@ -1,0 +1,46 @@
+---
+import Doc from '../layouts/Doc.astro';
+import { SITE } from '../config';
+const topics = [
+  { t: 'Getting started', items: [
+    ['How do I compress a photo?', 'Tap Choose photo (or Choose file), pick an image, set a maximum size such as 100 KB, then compress. Save a new copy or share it.'],
+    ['Which formats can I import?', 'JPEG, PNG and HEIC. Other types, such as PDF, are not supported and will show an “unsupported file” message.'],
+  ]},
+  { t: 'Results & quality', items: [
+    ['My file is smaller than my limit — is that normal?', 'Yes. The limit is a ceiling. TrueSize finds the best quality that stays at or under it, and the exact size is verified after encoding.'],
+    ['Why did my transparent PNG get a white background?', 'JPEG has no transparency, so transparent areas are filled with solid white when converting to JPEG. Keep PNG as the output format to preserve transparency (the file may be larger).'],
+    ['How is “KB” measured?', 'Decimal kilobytes: 1 KB = 1,000 bytes, matching most upload forms.'],
+    ['I can’t reach my target size.', 'Try a smaller output dimension, switch the format to JPEG, or raise the ceiling slightly. Very small limits on large images need reduced resolution.'],
+  ]},
+  { t: 'Saving & sharing', items: [
+    ['Where is my compressed image saved?', 'Saving uses the system file picker, so it goes wherever you choose. Your original is never overwritten.'],
+    ['Can I save directly to Photos?', 'Not in every version. You can always save a copy to your files, or use Share and pick your gallery app.'],
+  ]},
+  { t: 'Photo access', items: [
+    ['Fewer photos appear than expected.', 'TrueSize uses the system photo picker. Select more items in the picker, or allow access to all photos in your device settings.'],
+    ['An import was denied or the file is missing.', 'Temporary access to cloud or shared files can expire. Pick the image again, or copy it to local storage first.'],
+  ]},
+];
+---
+<Doc title="Support" eyebrow="Help center" description="Get help with TrueSize: answers to common questions, troubleshooting.">
+  <div class="prose topics">
+    {topics.map((g) => (
+      <section>
+        <h2>{g.t}</h2>
+        <div class="faq">{g.items.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
+      </section>
+    ))}
+    <section>
+      <p><a href="/privacy">Privacy policy</a></p>
+    </section>
+  </div>
+</Doc>
+<style is:global>
+  .topics .faq { display: grid; gap: 10px; }
+  .topics details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0 20px; }
+  .topics summary { cursor: pointer; font-weight: 600; padding: 16px 28px 16px 0; list-style: none; position: relative; min-height: 52px; color: var(--text); }
+  .topics summary::-webkit-details-marker { display: none; }
+  .topics summary::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--primary); }
+  .topics details[open] summary::after { content: '–'; }
+  .topics details p { padding-bottom: 18px; }
+</style>

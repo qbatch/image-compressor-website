@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+import Phone from '../components/Phone.astro';
+import { SITE } from '../config';
+
+const features = [
+  { icon: 'M12 3v18M3 12h18', t: 'A hard size ceiling', d: 'Set a maximum — 20 KB to 500 KB or your own number. TrueSize verifies the encoded file and never exceeds it.' },
+  { icon: 'M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z', t: '100% on-device', d: 'Every pixel is processed locally. Your photos are never uploaded and the app needs no network.' },
+  { icon: 'M4 7h16M4 12h16M4 17h10', t: 'JPEG, PNG & HEIC', d: 'Import the formats your phone actually produces. Transparent PNGs are flattened onto white when converting to JPEG.' },
+  { icon: 'M4 4h16v16H4zM4 14l5-5 4 4 3-3 4 4', t: 'Resize & reformat', d: 'Adjust dimensions and output format alongside the size limit to get the best quality for the bytes.' },
+  { icon: 'M12 15V3M7 8l5-5 5 5M5 21h14', t: 'Save or share', d: 'Save a new copy or open the system share sheet. Your original is never overwritten.' },
+  { icon: 'M12 12a4 4 0 100-8 4 4 0 000 8zM4 21c0-4 4-6 8-6s8 2 8 6', t: 'No account. No ads.', d: 'Nothing to sign up for, no tracking, no subscriptions in this release. Open it and compress.' },
+];
+const steps = [
+  { t: 'Choose a photo', d: 'Pick from your photo library or files using the system picker. You decide what the app sees, every time.' },
+  { t: 'Set your limit', d: 'Tap a quick size like 100 KB or enter a custom value. Tweak format and dimensions if you like.' },
+  { t: 'Compress & save', d: 'See the verified result size, then save a new copy or share it straight to the app that needs it.' },
+];
+const useCases = ['Visa & passport uploads', 'Job & university portals', 'Email attachments', 'Government forms', 'Marketplace listings', 'Chat & messaging'];
+const faqs = [
+  { q: 'Is TrueSize really free of uploads?', a: 'Yes. Compression happens entirely on your device and no images are sent over the network.' },
+  { q: 'Will my original photo be changed?', a: 'Never. TrueSize writes a new file when you save, and your original and its metadata stay untouched.' },
+  { q: 'What does “size ceiling” mean?', a: 'It is a maximum. The output is verified after encoding and will not exceed the limit you set. 1 KB is 1,000 bytes.' },
+  { q: 'Which formats are supported?', a: 'You can import JPEG, PNG and HEIC images. JPEG gives the strongest compression for photos.' },
+  { q: 'Why can’t I see all my photos?', a: 'TrueSize uses the system photo picker, so you choose what to share. Select more items in the picker or allow broader access in your device settings.' },
+];
+const jsonLd = { '@context': 'https://schema.org', '@type': 'MobileApplication', name: SITE.name, operatingSystem: 'Android, iOS', applicationCategory: 'PhotographyApplication', description: SITE.description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="copy">
+        <span class="eyebrow"><span class="dot"></span>100% on-device · zero network</span>
+        <h1>Get the right image size. <span>Without surprises.</span></h1>
+        <p class="lead">Pick a photo, set a size ceiling, and compress it locally. TrueSize hits your target — 20 KB, 100 KB or any limit a form demands — without ever uploading a pixel.</p>
+        <div class="actions">
+          {SITE.storeUrl
+            ? <a class="btn btn-primary" href={SITE.storeUrl}>Download the app</a>
+            : <span class="btn btn-primary" role="link" aria-disabled="true">Coming soon</span>}
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <ul class="proof">
+          <li>✓ No account</li><li>✓ Originals untouched</li><li>✓ Free to use</li>
+        </ul>
+      </div>
+      <div class="visual"><Phone /></div>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Use cases">
+    <div class="container"><p>Perfect for</p><ul>{useCases.map((u) => <li>{u}</li>)}</ul></div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Features</span><h2>Everything you need to hit the number.</h2><p>A focused tool that does one job precisely, and respects your privacy while doing it.</p></div>
+      <div class="features">
+        {features.map((f) => (
+          <article class="card feat">
+            <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={f.icon} /></svg></div>
+            <h3>{f.t}</h3><p>{f.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="how">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">How it works</span><h2>Three taps from oversized to perfect.</h2></div>
+      <ol class="steps">
+        {steps.map((s, i) => <li class="card step"><span class="num">{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section privacy">
+    <div class="container">
+      <div class="band">
+        <div><span class="eyebrow light">Privacy by design</span><h2>Your photos never leave your phone.</h2>
+        <p>TrueSize uses the system photo picker, processes images locally and collects nothing. No analytics, no cloud copies, no accounts.</p></div>
+        <a class="btn btn-light" href="/privacy">Read the privacy policy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container narrow">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>Questions, answered.</h2></div>
+      <div class="faq">
+        {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+      <p class="more">Still stuck? <a href="/support">Visit support</a>.</p>
+    </div>
+  </section>
+
+  <section class="section dl" id="download">
+    <div class="container">
+      <div class="dl-card">
+        <h2>Ready for the right size?</h2>
+        <p>Compress your next photo in seconds — privately, on your device.</p>
+        {SITE.storeUrl
+          ? <a class="btn btn-primary" href={SITE.storeUrl}>Download the app</a>
+          : <span class="soon"><span class="btn btn-primary" role="link" aria-disabled="true">Coming soon</span><small>The app is launching shortly.</small></span>}
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .hero { position: relative; overflow: hidden; padding-block: clamp(40px, 7vw, 88px) clamp(48px, 8vw, 96px); }
+  .glow { position: absolute; inset: -20% -10% auto; height: 560px; background: radial-gradient(60% 60% at 70% 30%, rgb(79 70 229 / .18), transparent 70%), radial-gradient(40% 50% at 15% 10%, rgb(199 210 254 / .35), transparent 70%); pointer-events: none; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  h1 { font-size: clamp(38px, 6vw, 68px); margin: 20px 0; letter-spacing: -0.035em; }
+  h1 span { background: linear-gradient(90deg, var(--primary), #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 540px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .proof { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 0; margin: 28px 0 0; color: var(--muted); font-size: 14px; font-weight: 500; }
+  .strip { border-block: 1px solid var(--line); background: var(--surface); }
+  .strip .container { display: flex; align-items: center; gap: 24px; padding-block: 20px; }
+  .strip p { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+  .strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 0; padding: 0; }
+  .strip li { padding: 6px 14px; border-radius: 999px; background: var(--surface-2); font-size: 14px; font-weight: 500; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feat { padding: 28px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .feat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--primary-soft); }
+  .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--primary-tint); color: var(--primary); display: grid; place-items: center; margin-bottom: 18px; }
+  .feat h3, .step h3 { font-size: 19px; margin-bottom: 8px; }
+  .feat p, .step p { color: var(--muted); font-size: 15.5px; }
+  .alt { background: var(--surface); border-block: 1px solid var(--line); }
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0; margin: 0; }
+  .step { padding: 28px; background: var(--bg); box-shadow: none; }
+  .num { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; margin-bottom: 18px; }
+  .band { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: linear-gradient(135deg, #4f46e5, #7c3aed 120%); color: #fff; border-radius: 24px; padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg); }
+  .band h2 { font-size: clamp(26px, 3.6vw, 38px); margin: 14px 0 12px; }
+  .band p { color: rgb(255 255 255 / .82); max-width: 560px; font-size: 17px; }
+  .eyebrow.light { background: rgb(255 255 255 / .14); color: #fff; }
+  .btn-light { background: #fff; color: #312e81; white-space: nowrap; }
+  .btn-light:hover { background: #eef2ff; color: #312e81; }
+  .narrow { max-width: 780px; }
+  .faq { display: grid; gap: 12px; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 20px; transition: border-color .15s; }
+  details[open] { border-color: var(--primary-soft); box-shadow: var(--shadow-sm); }
+  summary { cursor: pointer; font-weight: 600; padding: 18px 28px 18px 0; list-style: none; position: relative; min-height: 56px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--primary); transition: transform .2s; }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details p { color: var(--muted); padding-bottom: 20px; }
+  .dl { padding-top: 0; scroll-margin-top: 64px; }
+  .dl-card { text-align: center; display: grid; justify-items: center; gap: 14px; padding: clamp(36px, 6vw, 64px) 24px; background: linear-gradient(180deg, var(--primary-tint), var(--surface)); border: 1px solid var(--line); border-radius: 24px; }
+  .dl-card h2 { font-size: clamp(26px, 4vw, 38px); }
+  .dl-card p { color: var(--muted); font-size: 18px; max-width: 480px; margin-bottom: 8px; }
+  .soon { display: grid; gap: 10px; justify-items: center; }
+  .soon small { color: var(--muted); }
+  .more { margin-top: 24px; color: var(--muted); }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: left; }
+    .features { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: 1fr; }
+    .band { flex-direction: column; align-items: flex-start; }
+    .strip .container { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+  @media (max-width: 580px) { .features { grid-template-columns: 1fr; } .actions .btn { width: 100%; } }
+</style>
